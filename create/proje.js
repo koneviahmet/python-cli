@@ -24,12 +24,12 @@ async function asenkronAkis(proje_name){
       }else{
 
         /* burada projelerin tamamı kopyalandı */
-        await afs.copy_all_file(dir, 'codeigniter', proje_name);
+        await afs.copy_all_file(dir, 'python', proje_name);
 
-        /* databese ismini değiştirelim */
+        
+        /* databese ismini değiştirelim
         let projeConfig = proje_name + "/application/config/";
         let projeHelper = proje_name + "/application/helpers/";
-
 
 
         let db  = await afs.readFile(projeConfig + 'database.php');
@@ -39,6 +39,7 @@ async function asenkronAkis(proje_name){
         let helper  = await afs.readFile(projeHelper + 'ayar_helper.php');
         let helperD = await afs.replaceFile(helper, 'taslak', proje_name);
         await writeFile(projeHelper + 'ayar_helper.php', helperD);
+        */
 
       }
 
