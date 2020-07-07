@@ -1,0 +1,53 @@
+
+<div class="row">
+  <div class="col-sm-2">
+    <div class="list-group">
+      <a href="/v_user"class="list-group-item list-group-item-action">Ana Sayfa</a>
+      <a href="/v_user/user_giris" class="list-group-item list-group-item-action">Üye Girişi</a>
+      <a href="/v_user/user_kaydet" class="list-group-item list-group-item-action">Ekle</a>
+      <a href="/v_user/user_list" class="list-group-item list-group-item-action">liste</a>
+      <a href="/v_user/user_detay/1" class="list-group-item list-group-item-action">User Detay</a>
+      <a href="/v_user/user_duzenle" class="list-group-item list-group-item-action">Düzenle</a>
+      <a href="/v_user/user_ara" class="list-group-item list-group-item-action">Üye Ara</a>
+      <a href="/v_user/user_profil" class="list-group-item list-group-item-action">Üye Profil</a>
+    </div>
+
+  </div>
+  <!-- content -->
+  <div class="col-sm">
+    <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Üye Düzenle</h6>
+
+          <!-- label lat alta-->
+          <form>
+
+          <div class="form-group">
+            <label>adi</label>
+            <input type="text" class="form-control adi_inputTV" placeholder="adi" value="<?php print $user_info['adi']; ?>">
+          </div>
+
+          <div class="form-group">
+            <label>soyadi</label>
+            <input type="text" class="form-control soyadi_inputTV" placeholder="soyadi" value="<?php print $user_info['soyadi']; ?>">
+          </div>
+
+          <div class="form-group">
+            <label>email</label>
+            <input type="text" class="form-control email_inputTV" placeholder="email" value="<?php print $user_info['email']; ?>">
+          </div>
+
+          <div class="form-group">
+            <label>sifre</label>
+            <input type="password" class="form-control sifre_inputTV" placeholder="sifre" value="">
+          </div>
+
+
+            <a href="#" class="btn btn-danger float-right user_duzenleBTN" data-id="<?php print $user_info['user_id']; ?>" name="button">Düzenle</a>
+          </form>
+
+        </div>
+    </div>
+  </div>
+
+</div>

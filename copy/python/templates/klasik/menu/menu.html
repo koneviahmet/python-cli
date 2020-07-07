@@ -1,7 +1,11 @@
-<ul>
-    <li>
-        <a href="/">Ana Sayfa</a>
-        <a href="/hakkinda">Hakkında</a>
-        <a href="/iletisim">İletişim</a>
-    </li>
-</ul>
+<div class="row p-2">
+  <div class="col-sm text-right">
+    <?php if(!$user): ?>
+    <small> <a href="<?php print ayar('site_url'); ?>index.php?s=h_user&f=user_giris">Giriş Yap</a> </small>
+    <small> <a href="<?php print ayar('site_url'); ?>index.php?s=h_user&f=user_kaydet">Üye Ol</a> </small>
+    <?php else: ?>
+    <small>merhaba <?php print bbcode($user['adi']); ?></small>
+    <small> <a href="<?php print ayar('site_url'); ?>index.php?s=user&f=cikis">Çıkış Yap</a> </small>
+    <?php endif;?>
+  </div>
+</div>

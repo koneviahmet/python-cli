@@ -1,1 +1,15 @@
-header
+<!-- üst menü -->
+<div class="row">
+  <div class="col-sm">
+    <nav  class="float-right mt-2 mr-2">
+      <ul class="pagination">
+        <li class="page-item <?php print !$s ? 'active':''; ?>"><a class="page-link" href="/">Ana Sayfa</a></li>
+        <li class="page-item <?php print $s=='h_user'?'active':''; ?>"><a class="page-link" href="/v_user">User</a></li>
+        <li class="page-item <?php print $s=='h_dosya'?'active':''; ?>"><a class="page-link" href="/dosya">Dosya</a></li>
+        <li class="page-item <?php print $s=='h_taslak'?'active':''; ?>"><a class="page-link" href="/taslak">taslak</a></li>
+        <!--headerList-->
+      </ul>
+    </nav>
+
+  </div>
+</div>

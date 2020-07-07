@@ -10,6 +10,7 @@ db = SQLAlchemy(app)
 
 # controlleri ekliyoruz bu kısım için controller sayfasını kullanıcağız
 import controller.index
+import controller.v_user
 import controller.hakkinda
 import controller.iletisim
 import controller.ekle
@@ -20,4 +21,3 @@ db.session.commit()
 
 if __name__ == "__main__":
     app.run(port=5001)
-

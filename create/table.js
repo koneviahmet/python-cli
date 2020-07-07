@@ -57,7 +57,7 @@ async function asenkronAkis(table_name, secJson){
             /* her şey yolunda değişimleri yapabilirsin
             bundan sonrası al kopyala kaydet
             */
-            
+
 
 
 

@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    bu kısım index olan kısım <br>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>deneme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css') }}">
+  </head>
+  <body data-sitehref="localhost:5001">
 
-    {{ data.header|safe }} <br>
-    {{ data.menu|safe }} <br>
-    {{ data.content|safe }} <br>
-    {{ data.footer|safe }} <br>
-</body>
+
+    <!-- container -->
+    <div class="container">
+      {{ data.header|safe }}
+      {{ data.menu|safe }}
+      {{ data.content|safe }}
+      {{ data.footer|safe }}
+    </div>
+
+
+    <script src="{{url_for('static',filename='js/jquery.min.js') }}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js?') }}"></script>
+    <script src="{{url_for('static',filename='js/simpleUpload.js?.css') }}"></script>
+    <script src="{{url_for('static',filename='js/script.js') }}"></script>
+  </body>
 </html>
