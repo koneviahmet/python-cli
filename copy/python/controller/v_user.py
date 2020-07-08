@@ -1,5 +1,6 @@
 from __main__ import app, render_template
 
+
 @app.route('/v_user')
 def v_user():
     data = dict()

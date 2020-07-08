@@ -24,7 +24,7 @@ $(function(){
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            hata(sonuc.hata.hata);
+            hata(sonuc.hata);
           },
           function(sonuc){
             loading(false);
@@ -64,7 +64,7 @@ $(function(){
             function(sonuc){
               loading(false);
               ajax_durum = 0;
-              hata(sonuc.hata.hata);
+              hata(sonuc.hata);
             },
             function(sonuc){
               loading(false);
@@ -102,7 +102,7 @@ $(function(){
             function(sonuc){
               loading(false);
               ajax_durum = 0;
-              hata(sonuc.hata.hata);
+              hata(sonuc.hata);
             },
             function(sonuc){
               loading(false);
@@ -139,7 +139,7 @@ $(function(){
             function(sonuc){
               loading(false);
               ajax_durum = 0;
-              hata(sonuc.hata.hata);
+              hata(sonuc.hata);
             },
             function(sonuc){
               loading(false);
@@ -178,10 +178,10 @@ $(function(){
 
 
   $('.user_kaydetBTN').click(function(){
-    var adi = $('.adi_inputTV').val().trim();
-    var soyadi = $('.soyadi_inputTV').val().trim();
-    var email = $('.email_inputTV').val().trim();
-    var sifre = $('.sifre_inputTV').val().trim();
+    var adi     = $('.adi_inputTV').val().trim();
+    var soyadi  = $('.soyadi_inputTV').val().trim();
+    var email   = $('.email_inputTV').val().trim();
+    var sifre   = $('.sifre_inputTV').val().trim();
 
     loading(true);
     if(!adi || !soyadi || !email || !sifre){
@@ -191,17 +191,17 @@ $(function(){
 
       if(!ajax_durum){
         ajax_durum = 1;
-        ajax_al('user', 'user_kaydet', {'adi':adi,'soyadi':soyadi,'email':email,'sifre':sifre},
+        ajax_al('j_user', 'user_kaydet', {'adi':adi,'soyadi':soyadi,'email':email,'sifre':sifre},
 
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            hata(sonuc.hata.hata);
+            hata(sonuc.hata);
           },
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            oldu("Taslak başarıyla eklendi.");
+            oldu(sonuc.oldu);
         });
 
 
@@ -232,7 +232,7 @@ $(function(){
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            hata(sonuc.hata.hata);
+            hata(sonuc.hata);
           },
           function(sonuc){
             loading(false);
@@ -280,7 +280,7 @@ $(function(){
         function(sonuc){
           loading(false);
           ajax_durum = 0;
-          hata(sonuc.hata.hata);
+          hata(sonuc.hata);
         },
         function(sonuc){
           loading(false);
@@ -313,7 +313,7 @@ $(function(){
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            hata(sonuc.hata.hata);
+            hata(sonuc.hata);
           },
           function(sonuc){
             loading(false);
@@ -351,7 +351,7 @@ $(function(){
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            hata(sonuc.hata.hata);
+            hata(sonuc.hata);
           },
           function(sonuc){
             loading(false);
@@ -404,7 +404,7 @@ $(function(){
               $('.progressBar-content').hide();
               var sonuc = JSON.parse(data);
               if(sonuc.hata){
-                hata(sonuc.hata.hata);
+                hata(sonuc.hata);
                 console.log(sonuc.arr);
               }else{
                 oldu(sonuc.oldu);
@@ -444,15 +444,15 @@ $(function(){
   function ajax_al(s,f,data,hata,oldu){
     $.ajax({
       method: "POST",
-      url: site_url + "index.php?s=" + s + "&f=" + f,
+      url: site_url + s + "/" + f,
       dataType: 'json',
       data: data,
       success: function(sonuc){
-            if(sonuc.hata){
-              hata(sonuc);
-            }else{
-              oldu(sonuc);
-            }
+          if(sonuc.hata){
+            hata(sonuc);
+          }else{
+            oldu(sonuc);
+          }
       }
   });
   }
