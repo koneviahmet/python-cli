@@ -172,11 +172,8 @@ $(function(){
 
 
 
+
   /********TASLAK-Biter********************/
-
-
-
-
   $('.user_kaydetBTN').click(function(){
     var adi     = $('.adi_inputTV').val().trim();
     var soyadi  = $('.soyadi_inputTV').val().trim();
@@ -213,6 +210,7 @@ $(function(){
    return false;
   });
 
+
   /*
   üye girişi yapalım
   */
@@ -227,7 +225,7 @@ $(function(){
 
       if(!ajax_durum){
         ajax_durum = 1;
-        ajax_al('user', 'user_giris', {'email':email,'sifre':sifre},
+        ajax_al('j_user', 'user_giris', {'email':email,'sifre':sifre},
 
           function(sonuc){
             loading(false);
@@ -237,7 +235,7 @@ $(function(){
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            yonlen(sonuc.yonlen);
+            oldu(sonuc.oldu);
         });
 
 
