@@ -1,4 +1,4 @@
-from __main__ import app, render_template
+from __main__ import app, render_template, request,session, make_response
 
 
 @app.route('/v_user')
@@ -14,13 +14,30 @@ def v_user():
 
 @app.route('/v_user/user_giris')
 def v_user_giris():
+
     data = dict()
     data['deneme']  = "deneme"
     data['header']  = render_template('klasik/header/header.html', data = data)
     data['menu']    = render_template('klasik/menu/menu.html', data = data)
     data['content'] = render_template('klasik/content/user/user_giris.html', data = data)
     data['footer']  = render_template('klasik/footer/footer.html', data = data)
-    return render_template('klasik/index.html', data = data)
+    res = render_template('klasik/index.html', data = data)
+
+    """
+    #session
+    session['username'] = "userName Deneme"
+    print(session.pop('username', None))
+
+    #cooki
+    res = render_template('klasik/index.html', data = data)
+    res = make_response(res)
+    res.set_cookie('userID', "userId olacak")
+
+    userID = request.cookies.get('userID')
+    print(userID)
+    """
+
+    return res
 
 
 

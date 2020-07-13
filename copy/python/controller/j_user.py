@@ -48,13 +48,8 @@ def j_user_giris():
 
 
         try:
-            """
-            admin = User(adi, soyadi, email, sifre, "[1]", "1", "tarih")
-            db.session.add(admin)
-            db.session.commit()
-            """
-            data['oldu'] = "giriş başarıyla gerçekleştirildi."
-
+            userInfo = User.query.filter_by(email=str(email), sifre=str(sifre)).first()
+            data['oldu'] = "giriş başarıyla gerçekleştirildi." + str(userInfo.user_id)
         except Exception as e:
             print(e)
             data['hata'] = "Sistemsel bir hatadan dolayı giriş yapılamadı."
