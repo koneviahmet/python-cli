@@ -235,7 +235,9 @@ $(function(){
           function(sonuc){
             loading(false);
             ajax_durum = 0;
-            oldu(sonuc.oldu);
+            yonlen(site_url + 'v_user/user_profil');
+            //oldu(sonuc.oldu);
+
         });
 
 

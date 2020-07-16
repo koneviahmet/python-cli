@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request,session, make_response
+from flask import Flask, render_template, jsonify, request, session, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import random
@@ -21,7 +21,6 @@ import controller.j_user
 import controller.hakkinda
 import controller.iletisim
 import controller.ekle
-
 
 
 

@@ -1,5 +1,5 @@
-from __main__ import app, render_template, request,session, make_response
-
+from __main__ import app, render_template, request, session, make_response
+from library.lUser import lUser
 
 @app.route('/v_user')
 def v_user():
@@ -22,6 +22,7 @@ def v_user_giris():
     data['content'] = render_template('klasik/content/user/user_giris.html', data = data)
     data['footer']  = render_template('klasik/footer/footer.html', data = data)
     res = render_template('klasik/index.html', data = data)
+
 
     """
     #session
@@ -62,6 +63,7 @@ def v_user_list():
     data['footer']  = render_template('klasik/footer/footer.html', data = data)
     return render_template('klasik/index.html', data = data)
 
+
 @app.route('/v_user/user_detay/<userId>')
 def v_user_detay(userId):
     data = dict()
@@ -84,6 +86,7 @@ def v_user_duzenle():
     return render_template('klasik/index.html', data = data)
 
 
+
 @app.route('/v_user/user_ara')
 def v_user_ara():
     data = dict()
@@ -96,12 +99,25 @@ def v_user_ara():
 
 
 
+# üye profil sayfası
 @app.route('/v_user/user_profil')
 def v_user_profil():
     data = dict()
-    data['deneme']  = "deneme"
-    data['header']  = render_template('klasik/header/header.html', data = data)
-    data['menu']    = render_template('klasik/menu/menu.html', data = data)
-    data['content'] = render_template('klasik/content/user/user_profil.html', data = data)
-    data['footer']  = render_template('klasik/footer/footer.html', data = data)
+
+    userInfo = lUser().userInfo()
+    data['userInfo'] = userInfo
+    if not userInfo:
+        data['hata'] = "hata"
+
+
+    # hata denetimini yapalım
+    if 'hata' in data:
+        data['content'] = render_template('klasik/hata/404.html', data = data)
+    else:
+        data['header']  = render_template('klasik/header/header.html', data = data)
+        data['menu']    = render_template('klasik/menu/menu.html', data = data)
+        data['content'] = render_template('klasik/content/user/user_profil.html', data = data)
+        data['footer']  = render_template('klasik/footer/footer.html', data = data)
+
+
     return render_template('klasik/index.html', data = data)

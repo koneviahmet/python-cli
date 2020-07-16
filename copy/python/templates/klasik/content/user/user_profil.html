@@ -12,14 +12,25 @@
     </div>
   </div>
 
+
+
   <!-- content -->
   <div class="col-sm">
     <div class="card">
         <div class="card-body">
+
+          {% if not data.userInfo %}
+          <div class="alert alert-danger">
+            aradığınız üyeye ulaşılamadı
+          </div>
+          {% endif %}
+
           <h6 class="card-title">Üye Profil</h6>
-          <pre>
-            <?php print_r($user); ?>
-          </pre>
+          <h6>user_id: {{ data.userInfo.user_id }}</h6>
+          <h6>adı: {{ data.userInfo.adi }}</h6>
+          <h6>soyadı: {{ data.userInfo.soyadi }}</h6>
+          <h6>email: {{ data.userInfo.email }}</h6>
+          <h6>şifre: {{ data.userInfo.sifre }}</h6>
         </div>
     </div>
   </div>

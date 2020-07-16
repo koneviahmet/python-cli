@@ -1,4 +1,4 @@
-from __main__ import app, db, render_template, jsonify, request
+from __main__ import app, db, render_template, jsonify, request, make_response
 from model.user import User
 
 @app.route('/j_user/user_kaydet', methods=['POST'])
@@ -34,8 +34,6 @@ def j_user_kaydet():
 
 
 
-
-
 @app.route('/j_user/user_giris', methods=['POST', 'GET'])
 def j_user_giris():
     data = dict()
@@ -46,18 +44,25 @@ def j_user_giris():
         email   = request.form['email']
         sifre   = request.form['sifre']
 
-
         try:
             userInfo = User.query.filter_by(email=str(email), sifre=str(sifre)).first()
-            data['oldu'] = "giriş başarıyla gerçekleştirildi." + str(userInfo.user_id)
+            # userID = userInfo.user_id
+            data['oldu']  = "giriş başarıyla gerçekleştirildi."
+            data['email'] = userInfo.email
+            data['sifre'] = userInfo.sifre
         except Exception as e:
             print(e)
             data['hata'] = "Sistemsel bir hatadan dolayı giriş yapılamadı."
 
 
+    # data = make_response(data)
     # hata olmuş mu ona bakalım
     if('hata' in data):
-        return  jsonify(data)
+        res =  make_response(jsonify(data))
+        return res
     else:
         # hata yok demektir buradan devam edelim
-        return jsonify(data)
+        res =  make_response(jsonify(data))
+        res.set_cookie('email', str(data['email']))
+        res.set_cookie('sifre', str(data['sifre']))
+        return res
