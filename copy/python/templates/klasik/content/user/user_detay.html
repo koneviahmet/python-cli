@@ -19,16 +19,20 @@
     <div class="card">
         <div class="card-body">
           <h6 class="card-title">Üye Detay Sayfası</h6>
-          <a href="#" class="user_sil_modal" data-id='<?php print $user_id; ?>'>sil</a>
-          <a href="<?php print ayar('site_url'); ?>index.php?s=h_user&f=user_duzenle&user_id=<?php print $user_id; ?>">Düzenle</a>
+          <a href="#" class="user_sil_modal" data-id='{{ data.userInfo.user_id }}'>sil</a>
 
-          <?php foreach ($yetkili_list as $k => $v): ?>
-            <a href="<?php print ayar('site_url'); ?>index.php?s=user&f=yetki_duzenle&user_id=<?php print $user_id; ?>&yetki=<?php print $k; ?>"><?php print $v; ?></a>
-          <?php endforeach; ?>
+          {% if not data.userInfo %}
+          <div class="alert alert-danger">
+            aradığınız üyeye ulaşılamadı
+          </div>
+          {% endif %}
 
-          <pre>
-            <?php print_r($user_info); ?>
-          </pre>
+          <h6 class="card-title">Üye Profil</h6>
+          <h6>user_id: {{ data.userInfo.user_id }}</h6>
+          <h6>adı: {{ data.userInfo.adi }}</h6>
+          <h6>soyadı: {{ data.userInfo.soyadi }}</h6>
+          <h6>email: {{ data.userInfo.email }}</h6>
+          <h6>şifre: {{ data.userInfo.sifre }}</h6>
 
         </div>
     </div>

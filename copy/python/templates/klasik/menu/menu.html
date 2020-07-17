@@ -1,11 +1,11 @@
 <div class="row p-2">
   <div class="col-sm text-right">
-    <?php if(!$user): ?>
-    <small> <a href="<?php print ayar('site_url'); ?>index.php?s=h_user&f=user_giris">Giriş Yap</a> </small>
-    <small> <a href="<?php print ayar('site_url'); ?>index.php?s=h_user&f=user_kaydet">Üye Ol</a> </small>
-    <?php else: ?>
-    <small>merhaba <?php print bbcode($user['adi']); ?></small>
-    <small> <a href="<?php print ayar('site_url'); ?>index.php?s=user&f=cikis">Çıkış Yap</a> </small>
-    <?php endif;?>
+    {% if not data.userInfo %}
+    <small> <a href="/v_user/user_giris">Giriş Yap</a> </small>
+    <small> <a href="/v_user/user_kaydet">Üye Ol</a> </small>
+    {% else: %}
+    <small>merhaba {{ data.userInfo.adi }} {{ data.userInfo.soyadi }}</small>
+    <small> <a href="/v_user/user_cikis">Çıkış Yap</a> </small>
+    {% endif %}
   </div>
 </div>

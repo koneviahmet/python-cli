@@ -24,26 +24,26 @@
 
           <div class="form-group">
             <label>adi</label>
-            <input type="text" class="form-control adi_inputTV" placeholder="adi" value="<?php print $user_info['adi']; ?>">
+            <input type="text" class="form-control adi_inputTV" placeholder="adi" value="{{ data.userInfo.adi }}">
           </div>
 
           <div class="form-group">
             <label>soyadi</label>
-            <input type="text" class="form-control soyadi_inputTV" placeholder="soyadi" value="<?php print $user_info['soyadi']; ?>">
+            <input type="text" class="form-control soyadi_inputTV" placeholder="soyadi" value="{{ data.userInfo.soyadi }}">
           </div>
 
           <div class="form-group">
             <label>email</label>
-            <input type="text" class="form-control email_inputTV" placeholder="email" value="<?php print $user_info['email']; ?>">
+            <input type="text" class="form-control email_inputTV" placeholder="email" value="{{ data.userInfo.email }}">
           </div>
 
           <div class="form-group">
             <label>sifre</label>
-            <input type="password" class="form-control sifre_inputTV" placeholder="sifre" value="">
+            <input type="password" class="form-control sifre_inputTV" placeholder="sifre" value="{{ data.userInfo.sifre }}">
           </div>
 
 
-            <a href="#" class="btn btn-danger float-right user_duzenleBTN" data-id="<?php print $user_info['user_id']; ?>" name="button">Düzenle</a>
+            <a href="#" class="btn btn-danger float-right user_duzenleBTN" data-id="{{ data.userInfo.user_id }}" name="button">Düzenle</a>
           </form>
 
         </div>

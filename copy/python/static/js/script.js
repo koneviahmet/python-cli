@@ -276,7 +276,7 @@ $(function(){
 
     if(!ajax_durum){
       ajax_durum = 1;
-      ajax_al('user', 'user_duzenle', {'adi':adi,'soyadi':soyadi,'email':email,'sifre':sifre,'user_id':user_id},
+      ajax_al('j_user', 'user_duzenle', {'adi':adi,'soyadi':soyadi,'email':email,'sifre':sifre,'user_id':user_id},
         function(sonuc){
           loading(false);
           ajax_durum = 0;
@@ -308,12 +308,13 @@ $(function(){
       if(!ajax_durum){
         ajax_durum = 1;
 
-        ajax_al('user', 'user_sil', {'user_id': sil_user_id},
+        ajax_al('j_user', 'user_sil', {'user_id': sil_user_id},
 
           function(sonuc){
             loading(false);
             ajax_durum = 0;
             hata(sonuc.hata);
+            $('#userSilModal').modal('hide');
           },
           function(sonuc){
             loading(false);
@@ -346,7 +347,7 @@ $(function(){
       if(!ajax_durum){
         ajax_durum = 1;
 
-        ajax_al('user', 'user_ara', {'user_ara':ara},
+        ajax_al('j_user', 'user_ara', {'user_ara':ara},
 
           function(sonuc){
             loading(false);

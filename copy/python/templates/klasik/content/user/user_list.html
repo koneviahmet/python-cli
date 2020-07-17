@@ -29,26 +29,27 @@
                   </thead>
                   <tbody>
 
-                  <?php foreach ($user_list as $v): ?>
+                  {% for user in data.allUser %}
                   <tr class="userTr_<?php print $v['user_id']; ?>">
                       <td>
                         <i data-feather="link" style="max-width: 10px;"></i>
-                        <a href="<?php print ayar('site_url'); ?>index.php?s=h_user&f=user_detay&user_id=<?php print $v['user_id']; ?>">
-                          <?php print $v['adi']; ?> <?php print $v['soyadi']; ?>
+                        <a href="/v_user/user_detay/{{user.user_id}}">
+                          {{user.adi}} {{user.soyadi}}
                         </a>
                       </td>
                       <td class="text-right">
-                        <a href="#" class="user_sil_modal" data-id='<?php print $v['user_id']; ?>'>Sil</a>
-                        <a href="<?php print ayar('site_url'); ?>index.php?s=h_user&f=user_duzenle&user_id=<?php print $v['user_id']; ?>">Düzenle</a>
+                        <a href="#" class="user_sil_modal" data-id='{{user.user_id}}'>Sil</a>
                       </td>
                   </tr>
-                  <?php endforeach; ?>
+                  {% endfor %}
                   </tbody>
               </table>
 
-              <?php
-                  $thiss->uyari->hata($user_list, "user bulunamadı.");
-              ?>
+              {% if not data.allUser %}
+              <div class="alert alert-danger">
+                Üye bulunamadı.
+              </div>
+              {% endif %}
           </div>
 
         </div>
