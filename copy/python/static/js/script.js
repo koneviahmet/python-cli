@@ -358,7 +358,10 @@ $(function(){
             loading(false);
             ajax_durum = 0;
 
-            /* bulunan sonuçları bastıralım */
+            console.log(sonuc);
+            oldu('bulundu kanka');
+
+            /* bulunan sonuçları bastıralım
             $.each(sonuc.ara_sonuc, function(k,v){
               console.log(v.user_id);
               $('.araSonuc').append('<tr> \
@@ -370,6 +373,7 @@ $(function(){
                   </td> \
               </tr>');
             });
+            */
 
 
           });

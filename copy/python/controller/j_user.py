@@ -132,7 +132,8 @@ def j_user_sil():
 
 @app.route('/j_user/user_ara', methods=['POST'])
 def j_user_ara():
-    data = dict()
+    data  = dict()
+    sonuc = dict()
 
     if request.method != 'POST':
         data['hata'] = "post methodu göndermelisiniz."
@@ -148,7 +149,7 @@ def j_user_ara():
         #silme ile ilgili güvenlik önlemleri bu kısımda alınması gerekir.
 
 
-    data['hata'] = "doğru yerdesin" + ara
+    #data['hata'] = "doğru yerdesin" + ara
     # hata olmuş mu ona bakalım
     if('hata' in data):
         return  jsonify(data)
@@ -156,12 +157,18 @@ def j_user_ara():
         # hata yok demektir buradan devam edelim
         # veri katdetme işlemini hata yakalamak için try içinde yapalım
         try:
-            User.query.filter_by(user_id=user_id).delete()
-            db.session.commit()
-            data['oldu'] = "Üye başarıyla silindi silId: " + str(user_id)
+            search = "%{}%".format(ara)
+            users = User.query.filter(User.adi.like(search)).all()
+
+            i = 0
+            for usr in users:
+                data['ara_sonuc'] = usr.adi
+                i = i + 1
+
+            # data['ara_sonuc'] = jsonify(users)
         except Exception as e:
             print(e)
-            data['hata'] = "Sistemden kaynaklanan bir hatadan dolayı silme işlemi gerçekleştirilemedi."
+            data['hata'] = "Sistemden kaynaklanan bir hatadan dolayı arama işlemi gerçekleştirilemedi."
 
         return jsonify(data)
 
