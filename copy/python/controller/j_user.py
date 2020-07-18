@@ -160,10 +160,18 @@ def j_user_ara():
             search = "%{}%".format(ara)
             users = User.query.filter(User.adi.like(search)).all()
 
-            i = 0
+            liste = []
+            
             for usr in users:
-                data['ara_sonuc'] = usr.adi
-                i = i + 1
+                usrDict = dict()
+                usrDict['adi']      = usr.adi
+                usrDict['soyadi']   = usr.soyadi
+                usrDict['user_id']  = usr.user_id
+                liste.append(usrDict)
+
+
+            data['ara_sonuc'] = liste
+            print(liste)
 
             # data['ara_sonuc'] = jsonify(users)
         except Exception as e:

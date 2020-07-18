@@ -147,7 +147,7 @@ $(function(){
 
               /* bulunan sonuçları bastıralım */
               $.each(sonuc.ara_sonuc, function(k,v){
-                console.log(v.user_id);
+                
                 $('.araSonuc').append('<tr> \
                     <td> \
                       <i data-feather="link" style="max-width: 10px;"></i> \
@@ -358,22 +358,19 @@ $(function(){
             loading(false);
             ajax_durum = 0;
 
-            console.log(sonuc);
-            oldu('bulundu kanka');
-
-            /* bulunan sonuçları bastıralım
+            /* bulunan sonuçları bastıralım */
             $.each(sonuc.ara_sonuc, function(k,v){
               console.log(v.user_id);
               $('.araSonuc').append('<tr> \
                   <td> \
                     <i data-feather="link" style="max-width: 10px;"></i> \
-                    <a href="#"> \
+                    <a href="/v_user/user_detay/'+v.user_id+'"> \
                       '+ v.adi + ' ' + v.soyadi +' \
                     </a> \
                   </td> \
               </tr>');
             });
-            */
+            
 
 
           });
