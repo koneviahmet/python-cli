@@ -18,9 +18,9 @@ db = SQLAlchemy(app)
 import controller.index
 import controller.v_user
 import controller.j_user
-import controller.hakkinda
-import controller.iletisim
-import controller.ekle
+import controller.v_taslak
+import controller.j_taslak
+
 
 
 
