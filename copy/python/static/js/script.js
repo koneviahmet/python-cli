@@ -147,11 +147,10 @@ $(function(){
 
               /* bulunan sonuçları bastıralım */
               $.each(sonuc.ara_sonuc, function(k,v){
-
                 $('.araSonuc').append('<tr> \
                     <td> \
                       <i data-feather="link" style="max-width: 10px;"></i> \
-                      <a href="#"> \
+                      <a href="/v_taslak/taslak_detay/'+ v.taslak_id+'"> \
                         '+ v.taslak_id+' \
                       </a> \
                     </td> \

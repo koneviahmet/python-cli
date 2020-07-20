@@ -25,13 +25,17 @@ else:
     <div class="card">
         <div class="card-body">
           <h6 class="card-title">taslak detay sayfası</h6>
-          <a href="#" class="taslak_sil_modal" data-id='<?php print $taslak_id; ?>'>sil</a>
-          <a href="<?php print ayar('site_url'); ?>index.php?s=h_taslak&f=taslak_duzenle&taslak_id=<?php print $taslak_id; ?>">Düzenle</a>
+          <a href="#" class="taslak_sil_modal" data-id='{{data.taslakInfo.taslak_id}}'>sil</a>
+          <a href="/v_taslak/taslak_duzenle/{{data.taslakInfo.taslak_id}}">Düzenle</a>
 
 
-          <pre>
-            <?php print_r($taslak_info); ?>
-          </pre>
+          <ul>
+            <li>taslakId: {{data.taslakInfo.taslak_id}}</li>
+            <li>satır: {{data.taslakInfo.satir}}</li>
+            <li>durum: {{data.taslakInfo.durum}}</li>
+            <li>durum: {{data.taslakInfo.ekleyen_id}}</li>
+            <li>durum: {{data.taslakInfo.tarih}}</li>
+          </ul>
 
         </div>
     </div>

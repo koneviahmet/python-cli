@@ -1,13 +1,3 @@
-<?php
-$thiss =& get_instance();
-
-
-
-if($hata):
-  header("refresh:0; url=".ayar('site_url').'/index.php?s=hata&hata=404');
-else:
-
-?>
 <div class="row">
   <div class="col-sm-2">
     <div class="list-group">
@@ -23,37 +13,42 @@ else:
   <div class="col-sm">
     <div class="card">
         <div class="card-body">
+
+
+          <!-- üyeleri listeleteceğiz -->
           <div class="table-responsive">
               <table id="orders" class="table table-lg">
                   <thead>
                   <tr>
-                      <th>Taslaklar</th>
-                      <th class="text-right">Ayarlar</th>
+                      <th>Üyeler</th>
+                      <th class="text-right">Ayar</th>
                   </tr>
                   </thead>
                   <tbody>
 
-                  <?php foreach ($taslak_list as $v): ?>
-                  <tr class="taslakTr_<?php print $v['taslak_id']; ?>">
+                  {% for taslak in data.allTaslak %}
+                  <tr class="taslakTr_{{taslak.taslak_id}}">
                       <td>
                         <i data-feather="link" style="max-width: 10px;"></i>
-                        <a href="<?php print ayar('site_url'); ?>index.php?s=h_taslak&f=taslak_detay&taslak_id=<?php print $v['taslak_id']; ?>">
-                          <?php print $v['satir']; ?>
+                        <a href="/v_taslak/taslak_detay/{{taslak.taslak_id}}">
+                          {{taslak.taslak_id}}
                         </a>
                       </td>
                       <td class="text-right">
-                        <a href="#" class="taslak_sil_modal" data-id='<?php print $v['taslak_id']; ?>'> Sil </a>
-                        <a href="<?php print ayar('site_url'); ?>index.php?s=h_taslak&f=taslak_duzenle&taslak_id=<?php print $v['taslak_id']; ?>"> Düzenle </a>
+                        <a href="#" class="taslak_sil_modal" data-id='{{taslak.taslak_id}}'>Sil</a>
                       </td>
                   </tr>
-                  <?php endforeach; ?>
+                  {% endfor %}
                   </tbody>
               </table>
 
-              <?php
-                  $thiss->uyari->hata($taslak_list, "taslak bulunamadı.");
-              ?>
+              {% if not data.allTaslak %}
+              <div class="alert alert-danger">
+                Üye bulunamadı.
+              </div>
+              {% endif %}
           </div>
+
 
         </div>
     </div>

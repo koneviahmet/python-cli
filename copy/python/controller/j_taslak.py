@@ -4,7 +4,7 @@ from library.lUser import lUser
 
 
 # taslak kaydet
-@app.route('/j_taslak/taslak_kaydet', methods=['POST','GET'])
+@app.route('/j_taslak/taslak_kaydet', methods=['POST'])
 def j_taslak_kaydet():
     data = dict()
 
@@ -13,14 +13,9 @@ def j_taslak_kaydet():
     else:
         satir     = request.form['satir']
 
-        try:
-            taslak = Taslak(satir, 'ekleyen_id', 1, 'tarih')
-            db.session.add(taslak)
-            db.session.commit()
-            data['oldu'] = "yeni taslak başarıyla eklendi sonId: "
-        except Exception as e:
-            print(e)
-            data['hata'] = "Bilgileriniz kaydedilemedi."
+        userInfo = lUser().userInfo()
+        if not userInfo:
+            data['hata'] = "Bu sayfaya erişme yetkiniz yok"
 
 
     # hata olmuş mu ona bakalım
@@ -29,35 +24,48 @@ def j_taslak_kaydet():
         return  jsonify(data)
     else:
         # hata yok demektir buradan devam edelim
+        try:
+            taslak = Taslak(satir, userInfo.user_id, 1, 'tarih')
+            db.session.add(taslak)
+            db.session.commit()
+            data['oldu'] = "yeni taslak başarıyla eklendi sonId: "
+        except Exception as e:
+            print(e)
+            data['hata'] = "Bilgileriniz kaydedilemedi."
+
         return jsonify(data)
 
 
 
 # taslak düzenle
-@app.route('/j_taslak/taslak_duzenle', methods=['POST'])
+@app.route('/j_taslak/taslak_duzenle', methods=['POST', 'GET'])
 def j_taslak_duzenle():
     data = dict()
 
     if request.method != 'POST':
         data['hata'] = "post methodu göndermelisiniz."
     else:
-        satir = request.form['satir']
+        satir       = request.form['satir']
+        taslak_id   = request.form['taslak_id']
 
-        TaslakInfo = lTaslak().TaslakInfo()
-        if not TaslakInfo:
+        userInfo = lUser().userInfo()
+        if not userInfo:
             data['hata'] = "Bu sayfaya erişme yetkiniz yok"
+
 
         # uye bilgilerini alalım
         secilenTaslakInfo = Taslak.query.filter_by(taslak_id=str(taslak_id)).first()
         if not secilenTaslakInfo:
             data['hata'] = "Düzenlemek istediğiniz taslakye ulaşılamadı"
 
+
         #kendi profilini mi düzenliyor
-        if TaslakInfo.taslak_id != secilenTaslakInfo.taslak_id:
-            data['hata'] = "Profil düzenleme yetkiniz yok"
+        if str(userInfo.user_id) != str(secilenTaslakInfo.ekleyen_id):
+            data['hata'] = "taslak düzenleme yetkiniz yok"
 
 
-    # data['hata'] = "doğru yerdesin" + str(TaslakInfo.taslak_id)
+
+    # data['hata'] = "doğru yerdesin taslakId: " + str(userInfo.user_id)
     # hata olmuş mu ona bakalım
     if('hata' in data):
         return  jsonify(data)
@@ -65,15 +73,15 @@ def j_taslak_duzenle():
         # hata yok demektir buradan devam edelim
         # veri katdetme işlemini hata yakalamak için try içinde yapalım
         try:
-            Taslak = Taslak.query.filter_by(taslak_id=str(taslak_id)).first()
-            Taslak.satir      = satir
+            taslak = Taslak.query.filter_by(taslak_id=str(taslak_id)).first()
+            taslak.satir  = satir
             db.session.commit()
-            data['oldu'] = "yeni taslak başarıyla düzenlendi"
+            data['oldu'] = "taslak başarıyla düzenlendi"
         except Exception as e:
-            print(e)
             data['hata'] = "Bilgileriniz düzenlenemedi."
 
         return jsonify(data)
+
 
 
 # taslak silme işlemi burada
@@ -86,9 +94,10 @@ def j_taslak_sil():
     else:
         taslak_id = request.form['taslak_id']
 
-        TaslakInfo = lTaslak().TaslakInfo()
-        if not TaslakInfo:
+        userInfo = lUser().userInfo()
+        if not userInfo:
             data['hata'] = "Bu sayfaya erişme yetkiniz yok"
+
 
         # uye bilgilerini alalım
         secilenTaslakInfo = Taslak.query.filter_by(taslak_id=str(taslak_id)).first()
@@ -128,16 +137,16 @@ def j_taslak_ara():
     else:
         ara = request.form['taslak_ara']
 
-        TaslakInfo = lTaslak().TaslakInfo()
-        if not TaslakInfo:
-            data['hata'] = "Bu sayfaya erişme yetkiniz yok"
+        userInfo = lUser().userInfo()
+        if not userInfo:
+            data['hata'] = "Bu sayfaya erişöe yetkiniz yok"
 
 
 
         #silme ile ilgili güvenlik önlemleri bu kısımda alınması gerekir.
 
 
-    #data['hata'] = "doğru yerdesin" + ara
+    # data['hata'] = "doğru yerdesin" + ara
     # hata olmuş mu ona bakalım
     if('hata' in data):
         return  jsonify(data)
@@ -146,19 +155,17 @@ def j_taslak_ara():
         # veri katdetme işlemini hata yakalamak için try içinde yapalım
         try:
             search = "%{}%".format(ara)
-            Taslaks = Taslak.query.filter(Taslak.adi.like(search)).all()
+            Taslaks = Taslak.query.filter(Taslak.taslak_id.like(search)).all()
 
             liste = []
 
             for usr in Taslaks:
                 usrDict = dict()
-                usrDict['adi']      = usr.adi
-                usrDict['soyadi']   = usr.soyadi
                 usrDict['taslak_id']  = usr.taslak_id
                 liste.append(usrDict)
 
             data['ara_sonuc'] = liste
-            print(liste)
+
 
             # data['ara_sonuc'] = jsonify(Taslaks)
         except Exception as e:

@@ -30,10 +30,10 @@ else:
           <form>
             <div class="form-group">
               <label>satir</label>
-              <input type="text" class="form-control satir_inputTV" placeholder="satir" value="<?php print $taslak_info['satir']; ?>">
+              <input type="text" class="form-control satir_inputTV" placeholder="satir" value="{{data.taslakInfo.satir}}">
             </div>
 
-            <a href="#" class="btn btn-danger float-right taslak_duzenleBTN" data-id="<?php print $taslak_info['taslak_id']; ?>" name="button">taslak Düzenle</a>
+            <a href="#" class="btn btn-danger float-right taslak_duzenleBTN" data-id="{{data.taslakInfo.taslak_id}}" name="button">taslak Düzenle</a>
           </form>
 
 

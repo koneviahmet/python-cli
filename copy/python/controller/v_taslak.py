@@ -31,7 +31,7 @@ def v_taslak_list():
         data['content'] = render_template('klasik/hata/' + hataSayfa, data = data)
     else:
         # hata yok demektri
-        # data['allUser'] = taslak.query.all()
+        data['allTaslak'] = Taslak.query.all()
 
         data['header']  = render_template('klasik/header/header.html', data = data)
         data['menu']    = render_template('klasik/menu/menu.html', data = data)
@@ -40,6 +40,7 @@ def v_taslak_list():
 
 
     return render_template('klasik/index.html', data = data)
+
 
 
 @app.route('/v_taslak/taslak_detay/<taslakId>')
@@ -52,6 +53,12 @@ def v_taslak_detay(taslakId):
     if not userInfo:
         data['hata'] = "hata"
         hataSayfa    = 'yetki.html'
+
+    # uye bilgilerini alalım
+    taslakInfo = Taslak.query.filter_by(taslak_id=str(taslakId)).first()
+    data['taslakInfo'] = taslakInfo
+    if not taslakInfo:
+        data['hata'] = "taslak bulunamadı."
 
     # hata denetimini yapalım
     if 'hata' in data:
@@ -77,6 +84,11 @@ def v_taslak_duzenle(taslakId):
     if not userInfo:
         data['hata'] = "hata"
         hataSayfa    = 'yetki.html'
+
+
+    taslakInfo = Taslak.query.filter_by(taslak_id=str(taslakId)).first()
+    data['taslakInfo'] = taslakInfo
+
 
     # hata denetimini yapalım
     if 'hata' in data:
