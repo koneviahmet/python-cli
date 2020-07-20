@@ -1,1 +1,27 @@
 body{background: #eee;}
+
+.a-res-editor-ara-sonuc{overflow: auto;}
+.a-res-editor-ara-content{margin: 5px;}
+.a-res-editor-ara-text{}
+.a-res-editor-btn-res-yukle{background: #c0392b; border: none;}
+.a-res-editor-btn-res-yukle:hover{background: #c0392b; border: none;}
+.progressBar-content{display: none;}
+#progressBar{background: #c0392b; padding: 5px; width: 0;}
+#progress{color: #fff;}
+
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}

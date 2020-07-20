@@ -390,7 +390,7 @@ $(function(){
       var type = $(this).data('type');
       var sinavid = $(this).data('sinavid');
 
-      $(this).simpleUpload(site_url + "index.php?s=dosya&f=dosya_yukle&sinav_id="+sinavid, {
+      $(this).simpleUpload(site_url + "j_dosya/dosya_kaydet", {
           start: function(file){
               $('.progressBar-content').show();
               $('#filename').html(file.name);
@@ -403,13 +403,12 @@ $(function(){
           },
           success: function(data){
               $('.progressBar-content').hide();
-              var sonuc = JSON.parse(data);
-              if(sonuc.hata){
-                hata(sonuc.hata);
-                console.log(sonuc.arr);
+              if(data.hata){
+                hata(data.hata);
               }else{
-                oldu(sonuc.oldu);
+                oldu(data.oldu);
               }
+
           },
           error: function(error){
               $('.progressBar-content').hide();
