@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-sm-2">
     <div class="list-group">
-      <a href="/v_taslak" class="list-group-item list-group-item-action">Ana Sayfa</a>
-      <a href="/v_taslak/taslak_kaydet" class="list-group-item list-group-item-action">Ekle</a>
-      <a href="/v_taslak/taslak_duzenle/1" class="list-group-item list-group-item-action">Düzenle</a>
-      <a href="/v_taslak/taslak_detay/1" class="list-group-item list-group-item-action">Taslak Detay</a>
-      <a href="/v_taslak/taslak_list" class="list-group-item list-group-item-action">liste</a>
-      <a href="/v_taslak/taslak_ara" class="list-group-item list-group-item-action">Taslak Ara</a>
+      <a href="/v_dosya" class="list-group-item list-group-item-action">Ana Sayfa</a>
+      <a href="/v_dosya/dosya_kaydet" class="list-group-item list-group-item-action">Ekle</a>
+      <a href="/v_dosya/dosya_duzenle/1" class="list-group-item list-group-item-action">Düzenle</a>
+      <a href="/v_dosya/dosya_detay/1" class="list-group-item list-group-item-action">dosya Detay</a>
+      <a href="/v_dosya/dosya_list" class="list-group-item list-group-item-action">liste</a>
+      <a href="/v_dosya/dosya_ara" class="list-group-item list-group-item-action">dosya Ara</a>
     </div>
   </div>
   <!-- content -->
@@ -26,23 +26,25 @@
                   </thead>
                   <tbody>
 
-                  {% for taslak in data.allTaslak %}
-                  <tr class="taslakTr_{{taslak.taslak_id}}">
+                  {% for dosya in data.allDosya %}
+                  <tr class="dosyaTr_{{dosya.dosya_id}}">
                       <td>
                         <i data-feather="link" style="max-width: 10px;"></i>
-                        <a href="/v_taslak/taslak_detay/{{taslak.taslak_id}}">
-                          {{taslak.taslak_id}}
+                        <a href="/v_dosya/dosya_detay/{{dosya.dosya_id}}">
+
+                          <img style="max-width: 200px;" src="{{url_for('static',filename='yuklenen_dosyalar/' + dosya.url) }}" alt="">
+
                         </a>
                       </td>
                       <td class="text-right">
-                        <a href="#" class="taslak_sil_modal" data-id='{{taslak.taslak_id}}'>Sil</a>
+                        <a href="#" class="dosya_sil_modal" data-id='{{dosya.dosya_id}}'>Sil</a>
                       </td>
                   </tr>
                   {% endfor %}
                   </tbody>
               </table>
 
-              {% if not data.allTaslak %}
+              {% if not data.allDosya %}
               <div class="alert alert-danger">
                 Üye bulunamadı.
               </div>
@@ -58,7 +60,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="taslakSilModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="dosyaSilModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -72,7 +74,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-        <button type="button" class="btn btn-primary taslak_silBTN">Sil</button>
+        <button type="button" class="btn btn-primary dosya_silBTN">Sil</button>
       </div>
     </div>
   </div>
