@@ -1,6 +1,18 @@
 from __main__ import app, render_template, request, session, make_response
 from library.lUser import lUser
+from library.yetki import Yetki
 from model.taslak import Taslak
+
+
+
+# yetki kullanım örneği
+@app.route('/v_taslak/yetki')
+def v_taslak_yetki():
+    if Yetki(3).yetkiDenetle('denemeYetki'):
+        return "yetki var"
+    else:
+        return "yetki yok"
+
 
 
 @app.route('/v_taslak')
@@ -12,6 +24,7 @@ def v_taslak():
     data['content'] = render_template('klasik/content/taslak/anasayfa.html', data = data)
     data['footer']  = render_template('klasik/footer/footer.html', data = data)
     return render_template('klasik/index.html', data = data)
+
 
 
 
