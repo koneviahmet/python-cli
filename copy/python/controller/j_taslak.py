@@ -4,23 +4,18 @@ from library.lUser import lUser
 
 
 # taslak kaydet
-@app.route('/j_taslak/taslak_kaydet', methods=['POST'])
+@app.route('/j_taslak/taslak_kaydet', methods=['POST','GET'])
 def j_taslak_kaydet():
     data = dict()
 
     if request.method != 'POST':
         data['hata'] = "post methodu göndermelisiniz."
     else:
-        adi     = request.form['adi']
-        soyadi  = request.form['soyadi']
-        email   = request.form['email']
-        sifre   = request.form['sifre']
-
-        data['oldu'] = str(adi) + " şahıslı kişi"
+        satir     = request.form['satir']
 
         try:
-            admin = Taslak(adi, soyadi, email, sifre, "[1]", "1", "tarih")
-            db.session.add(admin)
+            taslak = Taslak(satir, 'ekleyen_id', 1, 'tarih')
+            db.session.add(taslak)
             db.session.commit()
             data['oldu'] = "yeni taslak başarıyla eklendi sonId: "
         except Exception as e:
@@ -29,6 +24,7 @@ def j_taslak_kaydet():
 
 
     # hata olmuş mu ona bakalım
+    # data['hata'] = "buradasın"
     if('hata' in data):
         return  jsonify(data)
     else:
@@ -45,15 +41,11 @@ def j_taslak_duzenle():
     if request.method != 'POST':
         data['hata'] = "post methodu göndermelisiniz."
     else:
-        adi         = request.form['adi']
-        soyadi      = request.form['soyadi']
-        email       = request.form['email']
-        sifre       = request.form['sifre']
-        taslak_id   = request.form['taslak_id']
+        satir = request.form['satir']
 
         TaslakInfo = lTaslak().TaslakInfo()
         if not TaslakInfo:
-            data['hata'] = "Bu sayfaya erişöe yetkiniz yok"
+            data['hata'] = "Bu sayfaya erişme yetkiniz yok"
 
         # uye bilgilerini alalım
         secilenTaslakInfo = Taslak.query.filter_by(taslak_id=str(taslak_id)).first()
@@ -74,15 +66,12 @@ def j_taslak_duzenle():
         # veri katdetme işlemini hata yakalamak için try içinde yapalım
         try:
             Taslak = Taslak.query.filter_by(taslak_id=str(taslak_id)).first()
-            Taslak.adi        = adi
-            Taslak.soyadi     = soyadi
-            Taslak.email      = email
-            Taslak.sifre      = sifre
+            Taslak.satir      = satir
             db.session.commit()
-            data['oldu'] = "yeni taslak başarıyla eklendi sonId: "
+            data['oldu'] = "yeni taslak başarıyla düzenlendi"
         except Exception as e:
             print(e)
-            data['hata'] = "Bilgileriniz kaydedilemedi."
+            data['hata'] = "Bilgileriniz düzenlenemedi."
 
         return jsonify(data)
 

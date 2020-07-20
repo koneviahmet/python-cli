@@ -13,13 +13,13 @@ $(function(){
     loading(true);
     if(!satir){
       loading(false);
-      hata('Ara formunu doldurmalısınız.');
+      hata('formun tamamını doldurmalısınız.');
     }else{
 
       if(!ajax_durum){
         ajax_durum = 1;
 
-        ajax_al('taslak', 'taslak_kaydet', {'satir':satir},
+        ajax_al('j_taslak', 'taslak_kaydet', {'satir':satir},
 
           function(sonuc){
             loading(false);
@@ -60,7 +60,7 @@ $(function(){
 
         if(!ajax_durum){
           ajax_durum = 1;
-          ajax_al('taslak', 'taslak_sil', {'taslak_id': sil_taslak_id},
+          ajax_al('j_taslak', 'taslak_sil', {'taslak_id': sil_taslak_id},
             function(sonuc){
               loading(false);
               ajax_durum = 0;
@@ -98,7 +98,7 @@ $(function(){
         if(!ajax_durum){
           ajax_durum = 1;
 
-          ajax_al('taslak', 'taslak_duzenle', {'satir':satir,'taslak_id':taslak_id},
+          ajax_al('j_taslak', 'taslak_duzenle', {'satir':satir,'taslak_id':taslak_id},
             function(sonuc){
               loading(false);
               ajax_durum = 0;
@@ -134,7 +134,7 @@ $(function(){
         if(!ajax_durum){
           ajax_durum = 1;
 
-          ajax_al('taslak', 'taslak_ara', {'taslak_ara':ara},
+          ajax_al('j_taslak', 'taslak_ara', {'taslak_ara':ara},
 
             function(sonuc){
               loading(false);
@@ -147,7 +147,7 @@ $(function(){
 
               /* bulunan sonuçları bastıralım */
               $.each(sonuc.ara_sonuc, function(k,v){
-                
+
                 $('.araSonuc').append('<tr> \
                     <td> \
                       <i data-feather="link" style="max-width: 10px;"></i> \
@@ -370,7 +370,7 @@ $(function(){
                   </td> \
               </tr>');
             });
-            
+
 
 
           });
