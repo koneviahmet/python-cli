@@ -19,7 +19,7 @@ def j_user_kaydet():
         data['oldu'] = str(adi) + " şahıslı kişi"
 
         try:
-            admin = User(adi, soyadi, email, sifre, "[1]", "1", "tarih")
+            admin = User(adi, soyadi, email, sifre, 1, "1", "tarih")
             db.session.add(admin)
             db.session.commit()
             data['oldu'] = "yeni üye başarıyla eklendi sonId: "
