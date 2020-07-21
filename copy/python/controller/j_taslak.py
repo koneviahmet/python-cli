@@ -11,7 +11,7 @@ def j_taslak_kaydet():
     if request.method != 'POST':
         data['hata'] = "post methodu göndermelisiniz."
     else:
-        satir     = request.form['satir']
+        satir=request.form['satir']
 
         userInfo = lUser().userInfo()
         if not userInfo:
@@ -30,7 +30,6 @@ def j_taslak_kaydet():
             db.session.commit()
             data['oldu'] = "yeni taslak başarıyla eklendi sonId: "
         except Exception as e:
-            print(e)
             data['hata'] = "Bilgileriniz kaydedilemedi."
 
         return jsonify(data)
@@ -38,14 +37,14 @@ def j_taslak_kaydet():
 
 
 # taslak düzenle
-@app.route('/j_taslak/taslak_duzenle', methods=['POST', 'GET'])
+@app.route('/j_taslak/taslak_duzenle', methods=['POST'])
 def j_taslak_duzenle():
     data = dict()
 
     if request.method != 'POST':
         data['hata'] = "post methodu göndermelisiniz."
     else:
-        satir       = request.form['satir']
+        satir=request.form['satir']
         taslak_id   = request.form['taslak_id']
 
         userInfo = lUser().userInfo()
@@ -74,7 +73,7 @@ def j_taslak_duzenle():
         # veri katdetme işlemini hata yakalamak için try içinde yapalım
         try:
             taslak = Taslak.query.filter_by(taslak_id=str(taslak_id)).first()
-            taslak.satir  = satir
+            taslak.satir=satir
             db.session.commit()
             data['oldu'] = "taslak başarıyla düzenlendi"
         except Exception as e:
@@ -120,7 +119,6 @@ def j_taslak_sil():
             db.session.commit()
             data['oldu'] = "taslak başarıyla silindi silId: " + str(taslak_id)
         except Exception as e:
-            print(e)
             data['hata'] = "Sistemden kaynaklanan bir hatadan dolayı silme işlemi gerçekleştirilemedi."
 
         return jsonify(data)
@@ -169,7 +167,6 @@ def j_taslak_ara():
 
             # data['ara_sonuc'] = jsonify(Taslaks)
         except Exception as e:
-            print(e)
             data['hata'] = "Sistemden kaynaklanan bir hatadan dolayı arama işlemi gerçekleştirilemedi."
 
         return jsonify(data)

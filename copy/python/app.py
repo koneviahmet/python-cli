@@ -25,7 +25,7 @@ import controller.v_taslak
 import controller.j_taslak
 import controller.v_dosya
 import controller.j_dosya
-
+#controllerImport
 
 
 # db oluşturuyoruz

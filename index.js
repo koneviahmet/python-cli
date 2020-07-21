@@ -16,7 +16,7 @@ program.parse(process.argv);
 if(program.install){
   /* instal */
   if(process.argv.length != 4){
-    console.log(clc.red("> php-cli -install <proje_name>"));
+    console.log(clc.red("> python-cli -install <proje_name>"));
   }else{
 
 
@@ -30,7 +30,7 @@ if(program.install){
 }else if(program.table){
   /* instal */
   if(process.argv.length != 4){
-    console.log(clc.red("> php-cli -install <proje_name>"));
+    console.log(clc.red("> python-cli -install <proje_name>"));
   }else{
 
 
@@ -44,5 +44,5 @@ if(program.install){
   }
 
 }else{
-  console.log(clc.red("> php-cli --help yazabilirsiniz.."));
+  console.log(clc.red("> python-cli --help yazabilirsiniz.."));
 }
