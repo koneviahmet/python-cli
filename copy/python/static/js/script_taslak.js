@@ -10,7 +10,7 @@
       if(!ajax_durum){
         ajax_durum = 1;
 
-        ajax_al('taslak', 'taslak_kaydet', {#eSatirSplitArr#},
+        ajax_al('j_taslak', 'taslak_kaydet', {#eSatirSplitArr#},
 
           function(sonuc){
             loading(false);
@@ -50,7 +50,7 @@
 
         if(!ajax_durum){
           ajax_durum = 1;
-          ajax_al('taslak', 'taslak_sil', {'taslak_id': sil_taslak_id},
+          ajax_al('j_taslak', 'taslak_sil', {'taslak_id': sil_taslak_id},
             function(sonuc){
               loading(false);
               ajax_durum = 0;
@@ -88,7 +88,7 @@
         if(!ajax_durum){
           ajax_durum = 1;
 
-          ajax_al('taslak', 'taslak_duzenle', {#eSatirSplitArr#,'taslak_id':taslak_id},
+          ajax_al('j_taslak', 'taslak_duzenle', {#eSatirSplitArr#,'taslak_id':taslak_id},
             function(sonuc){
               loading(false);
               ajax_durum = 0;
@@ -124,7 +124,7 @@
         if(!ajax_durum){
           ajax_durum = 1;
 
-          ajax_al('taslak', 'taslak_ara', {'taslak_ara':ara},
+          ajax_al('j_taslak', 'taslak_ara', {'taslak_ara':ara},
 
             function(sonuc){
               loading(false);
