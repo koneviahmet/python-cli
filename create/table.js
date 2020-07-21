@@ -49,7 +49,7 @@ async function asenkronAkis(table_name, secJson){
           console.log(clc.red("php-cli -install <proje_name>"));
         }else{
           /* tablo daha önce oluşturulmuş mu ona bakalım */
-          let model_durum  = await afs.isFile('modelx/'+table_name+'.py');
+          let model_durum  = await afs.isFile('model/'+table_name+'.py');
           //let model_durum  = false;
           if(model_durum){
             console.log(clc.red("tablo daha önce eklenmiş."));
