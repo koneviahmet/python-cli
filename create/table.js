@@ -35,9 +35,9 @@ async function asenkronAkis(table_name, secJson){
       */
 
       /*
-      let deneme  = await afs.readFile('codeigniter/deneme.php');
+      let deneme  = await afs.readFile('codeigniter/deneme.html');
       let denemeD = await afs.replaceFile(deneme, 'ol', table_name + ' oldu ');
-      await writeFile('codeigniter/deneme.php', denemeD);
+      await writeFile('codeigniter/deneme.html', denemeD);
       */
 
       let codeigniter_durum  = await afs.isFile('controller');
@@ -49,7 +49,7 @@ async function asenkronAkis(table_name, secJson){
           console.log(clc.red("php-cli -install <proje_name>"));
         }else{
           /* tablo daha önce oluşturulmuş mu ona bakalım */
-          let model_durum  = await afs.isFile('modelx/'+table_name+'.py');
+          let model_durum  = await afs.isFile('model/'+table_name+'.py');
           //let model_durum  = false;
           if(model_durum){
             console.log(clc.red("tablo daha önce eklenmiş."));
@@ -94,44 +94,64 @@ async function asenkronAkis(table_name, secJson){
 
 
               /********* VIEWS *****************/
-              await afs.createPage('templates/klasik/content/' + table_name);
-
-              //anasayfa
-              let viewAnaSayfa  = await afs.readFile('templates/klasik/content/taslak/anasayfa.html');
-              let viewAnaSayfaD = await afs.replaceFile(viewAnaSayfa, 'taslak', table_name);
-                  viewAnaSayfaD = await afs.replaceFile(viewAnaSayfaD, 'Taslak', table_nameUF);
-
-              await writeFile('templates/klasik/content/'+table_name+'/anasayfa.html', viewAnaSayfaD);
+              let viewsTaslakCopy = 'templates/klasik/content/taslakCopy/'
+              let projeViews      = "templates/klasik/content/" + table_name;
+              await afs.createPage(projeViews);
 
 
-              //ara
-              let viewAra  = await afs.readFile('templates/klasik/content/taslak/taslak_ara.html');
-              let viewAraD = await afs.replaceFile(viewAra, 'taslak', table_name);
-                  viewAraD = await afs.replaceFile(viewAraD, 'Taslak', table_nameUF);
+              // anasayfa.html
+              let views_anasayfa  = await afs.readFile(viewsTaslakCopy + 'anasayfa.html');
+              let views_anasayfaD = await afs.replaceFile(views_anasayfa, 'taslak', table_name);
+              views_anasayfaD = await afs.replaceFile(views_anasayfaD, 'Taslak', table_nameUF);
+              await writeFile(projeViews + '/anasayfa.html', views_anasayfaD);
 
-              await writeFile('templates/klasik/content/'+table_name+'/'+table_name+'_ara.html', viewAraD);
+              // taslak_ara.html
+              let taslak_ara  = await afs.readFile(viewsTaslakCopy + 'taslak_ara.html');
+              let taslak_araD = await afs.replaceFile(taslak_ara, 'taslak', table_name);
+              taslak_araD = await afs.replaceFile(taslak_araD, 'Taslak', table_nameUF);
+              await writeFile(projeViews + '/'+table_name+'_ara.html', taslak_araD);
 
-              //detay
-              let viewDetay  = await afs.readFile('templates/klasik/content/taslak/taslak_detay.html');
-              let viewDetayD = await afs.replaceFile(viewDetay, 'taslak', table_name);
-                  viewDetayD = await afs.replaceFile(viewDetayD, 'Taslak', table_nameUF);
+              // taslak_detay.html
+              let taslak_detay  = await afs.readFile(viewsTaslakCopy + 'taslak_detay.html');
+              let taslak_detayD = await afs.replaceFile(taslak_detay, 'taslak', table_name);
+              taslak_detayD = await afs.replaceFile(taslak_detayD, 'Taslak', table_nameUF);
+              await writeFile(projeViews + '/'+table_name+'_detay.html', taslak_detayD);
 
-              await writeFile('templates/klasik/content/'+table_name+'/'+table_name+'_detay.html', viewDetayD);
+              let dFormArr = "";
+              _.forEach(secJson,(value) => {
+                dFormArr += '<div class="form-group">\n \
+                         <label>'+ value +'</label>\n \
+                         <input type="text" class="form-control '+ value +'_inputTV" placeholder="'+ value +'" value="{{data.'+ table_name +'Info.'+ value +'}}">\n \
+                       </div>\n\n';
+              });
 
-              //duzenle
-              let viewDuzenle  = await afs.readFile('templates/klasik/content/taslak/taslak_duzenle.html');
-              let viewDuzenleD = await afs.replaceFile(viewDuzenle, 'taslak', table_name);
-                  viewDuzenleD = await afs.replaceFile(viewDuzenleD, 'Taslak', table_nameUF);
+              let eFormArr = "";
+               _.forEach(secJson,(value) => {
+                 eFormArr += '<div class="form-group">\n \
+                         <label>'+ value +'</label>\n \
+                         <input type="text" class="form-control '+ value +'_inputTV" placeholder="'+ value +'">\n \
+                       </div>\n\n';
+               });
 
-              await writeFile('templates/klasik/content/'+table_name+'/'+table_name+'_duzenle.html', viewDuzenleD);
+              // taslak_duzenle.html
+              let taslak_duzenle  = await afs.readFile(viewsTaslakCopy + 'taslak_duzenle.html');
+              let taslak_duzenleD = await afs.replaceFile(taslak_duzenle, 'taslak', table_name);
+              taslak_duzenleD = await afs.replaceFile(taslak_duzenleD, 'Taslak', table_nameUF);
+              taslak_duzenleD = await afs.replaceFile(taslak_duzenleD, '#dFormArr#', dFormArr);
+              await writeFile(projeViews + '/'+table_name+'_duzenle.html', taslak_duzenleD);
 
+              // taslak_kaydet.html
+              let taslak_kaydet  = await afs.readFile(viewsTaslakCopy + 'taslak_kaydet.html');
+              let taslak_kaydetD = await afs.replaceFile(taslak_kaydet, 'taslak', table_name);
+              taslak_kaydetD = await afs.replaceFile(taslak_kaydetD, 'Taslak', table_nameUF);
+              taslak_kaydetD = await afs.replaceFile(taslak_kaydetD, '#eFormArr#', eFormArr);
+              await writeFile(projeViews + '/'+table_name+'_kaydet.html', taslak_kaydetD);
 
-              //list
-              let viewList  = await afs.readFile('templates/klasik/content/taslak/taslak_list.html');
-              let viewListD = await afs.replaceFile(viewList, 'taslak', table_name);
-                  viewListD = await afs.replaceFile(viewListD, 'Taslak', table_nameUF);
-
-              await writeFile('templates/klasik/content/'+table_name+'/'+table_name+'_list.html', viewListD);
+              // taslak_list.html
+              let taslak_list  = await afs.readFile(viewsTaslakCopy + 'taslak_list.html');
+              let taslak_listD = await afs.replaceFile(taslak_list, 'taslak', table_name);
+              taslak_listD = await afs.replaceFile(taslak_listD, 'Taslak', table_nameUF);
+              await writeFile(projeViews + '/'+table_name+'_list.html', taslak_listD);
 
 
 
@@ -159,6 +179,38 @@ async function asenkronAkis(table_name, secJson){
                   modelTaslakD = await afs.replaceFile(modelTaslakD, 'self.satir=satir', postSelf);
 
               await writeFile('model/'+table_name+'.py', modelTaslakD);
+
+
+              /******** jScript ***************/
+              let projeJs = "static/js/";
+
+              let js_taslak  = await afs.readFile('static/js/script_taslak.js');
+              let js_taslakD = await afs.replaceFile(js_taslak, 'taslak', table_name);
+              js_taslakD = await afs.replaceFile(js_taslakD, 'Taslak', table_nameUF);
+
+
+              let dFormAjaxVar = "";
+              _.forEach(secJson,(value) => {
+                dFormAjaxVar += "\tvar "+value+" = $('."+value+"_inputTV').val().trim(); \n";
+              });
+              js_taslakD = await afs.replaceFile(js_taslakD, '#dFormAjaxVar#', dFormAjaxVar);
+
+              let dIfJoin = '!' + _.join(secJson,' || !');
+              js_taslakD = await afs.replaceFile(js_taslakD, '#ifSutun#', dIfJoin);
+
+              let eSatirSplitArr = [];
+               _.forEach(secJson,(value) => {
+                 eSatirSplitArr.push("'"+value+"':" + value);
+               });
+               js_taslakD = await afs.replaceFile(js_taslakD, '#eSatirSplitArr#', eSatirSplitArr);
+
+
+
+              /* değişkenleri burada kaydedeceğiz */
+              let js_kullanilan  = await afs.readFile(projeJs + 'script.js');
+              let js_kullanilanD = await afs.replaceFile(js_kullanilan, '//jsEkle', '//jsEkle \n \n' + js_taslakD);
+              await writeFile(projeJs + 'script.js', js_kullanilanD);
+
 
           }
         }

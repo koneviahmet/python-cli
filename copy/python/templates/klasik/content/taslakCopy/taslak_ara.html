@@ -1,0 +1,50 @@
+
+<div class="row">
+  <div class="col-sm-2">
+    <div class="list-group">
+      <a href="/v_taslak" class="list-group-item list-group-item-action">Ana Sayfa</a>
+      <a href="/v_taslak/taslak_kaydet" class="list-group-item list-group-item-action">Ekle</a>
+      <a href="/v_taslak/taslak_duzenle/1" class="list-group-item list-group-item-action">Düzenle</a>
+      <a href="/v_taslak/taslak_detay/1" class="list-group-item list-group-item-action">Taslak Detay</a>
+      <a href="/v_taslak/taslak_list" class="list-group-item list-group-item-action">liste</a>
+      <a href="/v_taslak/taslak_ara" class="list-group-item list-group-item-action">Taslak Ara</a>
+    </div>
+  </div>
+
+    <!-- content -->
+    <div class="col-sm">
+      <div class="card">
+          <div class="card-body">
+
+            <form>
+              <div class="input-group">
+                  <input type="text" class="form-control taslak_araTV" placeholder="Aranacak Metin" value="">
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-alert taslak_araBTN" type="button">Ara</button>
+                  </div>
+              </div>
+            </form>
+
+
+            <!-- burada kurum list yapacağız -->
+            <div class="table-responsive">
+                <table id="orders" class="table table-lg">
+                    <thead>
+                    <tr>
+                        <th>taslaklar</th>
+                    </tr>
+                    </thead>
+                    <tbody class="araSonuc">
+
+                    <!-- aranan sayfanın basılacağı kısım -->
+                    </tbody>
+                </table>
+            </div>
+
+
+
+          </div>
+      </div>
+    </div>
+
+  </div>
