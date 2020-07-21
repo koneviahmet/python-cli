@@ -215,7 +215,7 @@ async function asenkronAkis(table_name, secJson){
               /* header list yapalım */
               let projeViewsHeader = "templates/klasik/header/";
 
-              let hMenuList = '<li class="page-item <?php print $s=="h_'+table_name+'"?"active":""; ?>">  \
+              let hMenuList = '<li class="page-item">  \
                       <a class="page-link" href="/v_'+table_name+'">'+table_name+'</a> \
                       </li> \n <!--headerList-->';
 
