@@ -49,7 +49,7 @@ async function asenkronAkis(table_name, secJson){
           console.log(clc.red("php-cli -install <proje_name>"));
         }else{
           /* tablo daha önce oluşturulmuş mu ona bakalım */
-          let model_durum  = await afs.isFile('model/'+table_name+'.py');
+          let model_durum  = await afs.isFile('modelx/'+table_name+'.py');
           //let model_durum  = false;
           if(model_durum){
             console.log(clc.red("tablo daha önce eklenmiş."));
@@ -68,7 +68,7 @@ async function asenkronAkis(table_name, secJson){
 
                 let postSilme = "";
                 _.forEach(secJson,(value) => {
-                  postSilme  += "\n\t\t"+value+" = request.form['"+value+"']";
+                  postSilme  += "\n        "+value+" = request.form['"+value+"']";
                 });
                 jTaslakD = await afs.replaceFile(jTaslakD, "satir=request.form\\['satir']", postSilme);
 
@@ -78,7 +78,7 @@ async function asenkronAkis(table_name, secJson){
 
                 let editDataSilme = "";
                 _.forEach(secJson,(value) => {
-                  editDataSilme  += "\n\t\t\t"+table_name+"."+value+" = "+value;
+                  editDataSilme  += "\n            "+table_name+"."+value+" = "+value;
                 });
                 jTaslakD = await afs.replaceFile(jTaslakD, table_name + '.satir=satir', editDataSilme);
 
@@ -162,7 +162,7 @@ async function asenkronAkis(table_name, secJson){
 
                   let postModel = "";
                   _.forEach(secJson,(value) => {
-                    postModel  += "\n\t"+value+"  \t\t= db.Column(db.String(255))";
+                    postModel  += "\n    "+value+"        = db.Column(db.String(255))";
                   });
 
 
@@ -173,7 +173,7 @@ async function asenkronAkis(table_name, secJson){
 
                   let postSelf = "";
                   _.forEach(secJson,(value) => {
-                    postSelf  += "\n\t\tself."+value+" \t\t= " + value;
+                    postSelf  += "\n        self."+value+"     = " + value;
                   });
 
                   modelTaslakD = await afs.replaceFile(modelTaslakD, 'self.satir=satir', postSelf);
