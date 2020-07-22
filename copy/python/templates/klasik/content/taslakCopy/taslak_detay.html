@@ -18,10 +18,14 @@
           <h6 class="card-title">taslak detay sayfası</h6>
           <a href="#" class="taslak_sil_modal" data-id='{{data.taslakInfo.taslak_id}}'>sil</a>
           <a href="/v_taslak/taslak_duzenle/{{data.taslakInfo.taslak_id}}">Düzenle</a>
-          
-          <pre>
-            <?php print_r($taslak_info); ?>
-          </pre>
+
+          <ul>
+            <li>taslakId: {{data.taslakInfo.taslak_id}}</li>
+            #detayList
+            <li>durum: {{data.taslakInfo.durum}}</li>
+            <li>ekleyen_id: {{data.taslakInfo.ekleyen_id}}</li>
+            <li>tarih: {{data.taslakInfo.tarih}}</li>
+          </ul>
         </div>
     </div>
   </div>

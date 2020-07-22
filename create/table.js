@@ -115,6 +115,13 @@ async function asenkronAkis(table_name, secJson){
               let taslak_detay  = await afs.readFile(viewsTaslakCopy + 'taslak_detay.html');
               let taslak_detayD = await afs.replaceFile(taslak_detay, 'taslak', table_name);
               taslak_detayD = await afs.replaceFile(taslak_detayD, 'Taslak', table_nameUF);
+
+
+              let detayList = "";
+              _.forEach(secJson,(value) => {
+                detayList  += '<li>'+value+': {{data.'+table_name+'Info.'+value+'}}</li>';
+              });
+              taslak_detayD = await afs.replaceFile(taslak_detayD, '#detayList', detayList);
               await writeFile(projeViews + '/'+table_name+'_detay.html', taslak_detayD);
 
               let dFormArr = "";
