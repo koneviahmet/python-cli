@@ -98,7 +98,6 @@ async function asenkronAkis(table_name, secJson){
               let projeViews      = "templates/klasik/content/" + table_name;
               await afs.createPage(projeViews);
 
-
               // anasayfa.html
               let views_anasayfa  = await afs.readFile(viewsTaslakCopy + 'anasayfa.html');
               let views_anasayfaD = await afs.replaceFile(views_anasayfa, 'taslak', table_name);
